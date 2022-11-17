@@ -1,20 +1,35 @@
+# 
+
+
 # 347. Top K Frequent Elements
 def topKFrequent(nums, k):
-    # so while k > 1 check which numbers are most frequent
-    # input -> list of ints, int
-    # output -> list of 0 or more ints
-    # edge -> what if there is a tie for a number?
-    # brute force solution w/o time-complexity
-    d = {}
-    final = []
-    for num in set(nums):
-        d[nums.count(num)] = num
-    while k > 0:
-        # bsically get the max number from d, add to final
-        k -= 1
-    return
+    
 
-print(topKFrequent(nums = [1,1,1,2,2,3], k = 2))
+
+    # # so while k > 1 check which numbers are most frequent
+    # # input -> list of ints, int
+    # # output -> list of 0 or more ints
+    # # edge -> what if there is a tie for a number?
+    # # brute force solution w/o time-complexity
+    # d = {}
+    # final = []
+    # for num in set(nums):
+    #     d[nums.count(num)] = num
+    # # print(d.keys())
+    # while k > 0 and nums:
+    #     # bsically get the max number from d, add to final
+    #     # final.append(d[max(d.keys())])
+    #     # d.pop(max(d.keys()))
+    #     sorted_keys = sorted(d.keys(), reverse=True)
+    #     max_num = sorted_keys[0]
+    #     final.append(d[max_num])
+    #     d.pop(max_num)
+    #     k -= 1
+    # return final
+
+print(topKFrequent(nums = [1,1,1,2,2,3,2,2,2,2,3], k = 2))
+print(topKFrequent(nums = [1], k = 1))
+print(topKFrequent(nums = [], k = 1))
 
 
 # # 49. Group Anagrams - O(m*n) - m is the len of list, n the len of str
@@ -32,7 +47,6 @@ print(topKFrequent(nums = [1,1,1,2,2,3], k = 2))
 #     return res.values()
 
 # print(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
-
 
 # # Input: strs = ["eat","tea","tan","ate","nat","bat"]
 # # Output: [["bat"],["nat","tan"],["ate","eat","tea"]]

@@ -1,10 +1,27 @@
-# 
 
 
-# 347. Top K Frequent Elements
+
+# 347. Top K Frequent Elements - O(n) bucket sort
 def topKFrequent(nums, k):
+    # instead of doing nums.count...for loop through all array, add value to count of d
+    # 
+    count = {}
+    freq = [[] for i in range(len(nums)+1)]
+    for n in nums: 
+        count[n] = count.get(n, 0) + 1
+    for n, c in count.items():
+        freq[c].append(n)
     
+    res = []
+    for i in range(len(freq)-1, 0, -1): # taking the reverse freq list start at end and end at start
+        for n in freq[i]:
+            res.append(n)
+            if len(res) == k:
+                return res
 
+print(topKFrequent(nums = [1,1,1,2,2,3,2,2,2,2,3], k = 2))
+print(topKFrequent(nums = [1], k = 1))
+print(topKFrequent(nums = [], k = 1))
 
     # # so while k > 1 check which numbers are most frequent
     # # input -> list of ints, int
@@ -27,9 +44,6 @@ def topKFrequent(nums, k):
     #     k -= 1
     # return final
 
-print(topKFrequent(nums = [1,1,1,2,2,3,2,2,2,2,3], k = 2))
-print(topKFrequent(nums = [1], k = 1))
-print(topKFrequent(nums = [], k = 1))
 
 
 # # 49. Group Anagrams - O(m*n) - m is the len of list, n the len of str

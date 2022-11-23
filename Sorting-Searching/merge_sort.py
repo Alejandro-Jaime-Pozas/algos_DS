@@ -1,3 +1,4 @@
+# better than bogo_sort, selection_sort
 import random
 # numbers = [5, 3, 7, 2, 3, 8, 9]
 numbers = [random.randint(0, 1000) for _ in range(1001)]

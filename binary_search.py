@@ -23,4 +23,4 @@ def verify(index):
 
 
 numbers = list(range(2, 21, 2))
-(verify(binary_search(numbers, 20)))
+print(verify(binary_search(numbers, 20)))

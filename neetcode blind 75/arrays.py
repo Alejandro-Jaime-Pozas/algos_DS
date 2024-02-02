@@ -1,49 +1,49 @@
 
 
 
-# 128. Longest Consecutive Sequence - O(n)
-def longestConsecutive(nums):
-    # neetcode
-    num_set = set(nums)
-    longest = 0
+# # 128. Longest Consecutive Sequence - O(n)
+# def longestConsecutive(nums):
+#     # neetcode
+#     num_set = set(nums)
+#     longest = 0
 
-    for n in nums:
-        # check if n is the start of a sequence
-        if (n - 1) not in num_set:
-            length = 0
-            while (n + length) in num_set:
-                length += 1
-            longest = max(length, longest)
-    return longest
+#     for n in nums:
+#         # check if n is the start of a sequence
+#         if (n - 1) not in num_set:
+#             length = 0
+#             while (n + length) in num_set:
+#                 length += 1
+#             longest = max(length, longest)
+#     return longest
 
-    # need to sort? can keep track of numbers..maybe wo sorting
-    # looking for consecutive numbers. could mean either n+1 or n-1..
-    # can store each num in hash, check if n-1 or n+1 in hash, create another hash to store counting lengths..final for loop to check hash items of counting lengths, return highests num (max)
-    # cannot only look for n-1 or n+1, need to look at all prev values
-    if not nums:
-        return 0
-    # nums.sort() # you cant sort
-    values = {}
-    count = 1
-    for i in range(len(nums)-1):
-        if nums[i+1] == nums[i] + 1:
-            count += 1
-        elif nums[i+1] == nums[i]:
-            continue
-        else:
-            values[nums[i]] = count
-            count = 1
-    else:
-        values['only_one'] = count
-        count = 1
-    maxn = 0
-    for length in values.values():
-        if length > maxn:
-            maxn = length
-    print(values)
-    return maxn
+#     # need to sort? can keep track of numbers..maybe wo sorting
+#     # looking for consecutive numbers. could mean either n+1 or n-1..
+#     # can store each num in hash, check if n-1 or n+1 in hash, create another hash to store counting lengths..final for loop to check hash items of counting lengths, return highests num (max)
+#     # cannot only look for n-1 or n+1, need to look at all prev values
+#     if not nums:
+#         return 0
+#     # nums.sort() # you cant sort
+#     values = {}
+#     count = 1
+#     for i in range(len(nums)-1):
+#         if nums[i+1] == nums[i] + 1:
+#             count += 1
+#         elif nums[i+1] == nums[i]:
+#             continue
+#         else:
+#             values[nums[i]] = count
+#             count = 1
+#     else:
+#         values['only_one'] = count
+#         count = 1
+#     maxn = 0
+#     for length in values.values():
+#         if length > maxn:
+#             maxn = length
+#     print(values)
+#     return maxn
 
-print(longestConsecutive([0,3,7,2,5,8,4,6,0,1,10]))
+# print(longestConsecutive([0,3,7,2,5,8,4,6,0,1,10]))
 
 # # encode and decode strings (premium) - O(n)
 # class Solution:

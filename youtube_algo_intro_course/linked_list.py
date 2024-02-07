@@ -49,3 +49,82 @@ class LinkedList:
         new_node = Node(data)
         new_node.next_node = self.head 
         self.head = new_node
+
+    def search(self, key):
+        '''
+        Search for the first node containing data that matches the key
+        Return the node or 'None' if not found
+        O(n) time
+        '''
+        
+        current = self.head 
+
+        while current:
+            if current.data == key:
+                return current 
+            else:
+                current = current.next_node
+        return None 
+
+    def insert(self, data, index):
+        '''
+        Insert a new node containing data at index position
+        Insertion takes O(1) time but finding the node at the insertion point takes O(n) time
+
+        O(n) time
+        '''
+        if index == 0:
+            self.add(data)
+
+        if index > 0:
+            new = Node(data)
+
+            position = index 
+            current = self.head 
+
+            while position > 1:
+                current = new.next_node
+                position -= 1
+            prev = current 
+            next = current.next_node
+
+            prev.next_node = new
+            new.next_node = next 
+
+    def remove(self, key):
+        '''
+        Removes node containing data that matches the key
+        REturns the node or None if key doesn't exist
+        O(n) time
+        '''
+        current = self.head 
+        previous = None 
+        found = False 
+
+        while current and not found:
+            if current.data == key and current is self.head:
+                found = True 
+                self.head = current.next_node 
+            elif current.data == key:
+                found = True 
+                previous.next_node = current.next_node
+            else:
+                # set current node to previous, and next node to current for next iteration
+                previous = current 
+                current = current.next_node
+        return current 
+
+    def __repr__(self):
+        nodes = []
+        current = self.head 
+
+        while current:
+            if current is self.head: # if this node is the first/newest node
+                nodes.append(f"[Head: {current.data}]")
+            elif current.next_node is None: # if this node is the last/oldest node
+                nodes.append(f"[Tail: {current.data}]")
+            else:
+                nodes.append(f"[{current.data}]")
+
+            current = current.next_node
+        return ' -> '.join(nodes)

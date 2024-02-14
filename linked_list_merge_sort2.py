@@ -1,4 +1,4 @@
-from linked_list import LinkedList
+from linked_list2 import LinkedList
 
 # l = LinkedList()
 # l.add(1)

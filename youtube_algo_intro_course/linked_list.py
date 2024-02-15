@@ -1,6 +1,7 @@
 # LINKED LISTS ARE MADE UP OF NODES WHICH ARE SELF REFERENTIAL OBJECTS
 # SINGLY LINKED LIST: EACH NODE STORES A REF TO THE NEXT NODE IN THE LIST
 # DOUBLY LINKED LIST: EACH NODE STORES REF TO PREV AND NEXT NODE IN THE LIST
+# CHECK THIS IN PYTHON TUTOR SITE HOW IT WORKS
 
 class Node:
     '''
@@ -113,6 +114,19 @@ class LinkedList:
                 previous = current 
                 current = current.next_node
         return current 
+
+    def node_at_index(self, index):
+        if index == 0:
+            return self.head
+        else:
+            current = self.head 
+            position = 0
+
+            while position < index:
+                current = current.next_node
+                position += 1
+
+            return current
 
     def __repr__(self):
         nodes = []

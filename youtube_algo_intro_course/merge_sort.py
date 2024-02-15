@@ -1,6 +1,8 @@
 # CHECK THIS IN PYTHON TUTOR SITE HOW IT WORKS
 def merge_sort(list):
     '''
+    O(kn log n)
+
     Sorts a list in ascending order
     Returns a new sorted list
 
@@ -21,14 +23,16 @@ def merge_sort(list):
 
 def split(list):
     '''
+    O(k log n)
     Divides the unsorted list at mipoint into sublists
     Returns 2 sublists
     '''
     midpoint = len(list) // 2
-    return list[:midpoint], list[midpoint:]
+    return list[:midpoint], list[midpoint:] # index slicing in py takes 'k' time
 
 def merge(left, right):
     '''
+    O(n log n)
     Merges 2 lists sorting them in the process
     Returns a new merged list
     '''

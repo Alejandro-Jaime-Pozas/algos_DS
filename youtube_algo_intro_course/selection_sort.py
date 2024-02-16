@@ -1,8 +1,5 @@
 import random
 
-numbers10k = [random.randint(1,10000) for _ in range(10000)]
-numbers1m = [random.randint(1,10000) for _ in range(1000000)]
-
 
 def selection_sort(values):
 
@@ -30,5 +27,7 @@ def index_of_min(values):
     #     final_list.append(min)
     # return final_list 
 
-numbers1 = [8,5,1,4,7,]
-print(selection_sort(numbers10k))
+
+print(selection_sort([8,5,1,4,7,]))
+# print(selection_sort([random.randint(1,10000) for _ in range(10000)]))
+# print(selection_sort([random.randint(1,10000) for _ in range(1000000)]))

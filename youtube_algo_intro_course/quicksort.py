@@ -1,6 +1,7 @@
 # this seems to first go into the first quicksort(less_than_pivot) recursively until reaching base case, then to the other quicksort recursive once base case for first is returned
 def quicksort(values):
     if len(values) <= 1:
+        print('base case reached for values: ', values )
         return values 
     less_than_pivot = []
     more_than_pivot = []

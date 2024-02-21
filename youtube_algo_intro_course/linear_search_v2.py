@@ -12,4 +12,3 @@ if __name__=="__main__":
     for n in search_names:
         index = index_of_item(names, n)
         print(n, 'at index:', index)
-

@@ -84,13 +84,11 @@ class LinkedList:
             current = self.head 
 
             while position > 1:
-                current = new.next_node
+                current = current.next_node
                 position -= 1
-            prev = current 
-            next = current.next_node
 
-            prev.next_node = new
-            new.next_node = next 
+            current.next_node = new
+            new.next_node = current.next_node 
 
     def remove(self, key):
         '''
@@ -142,3 +140,16 @@ class LinkedList:
 
             current = current.next_node
         return ' -> '.join(nodes)
+    
+
+# n1 = Node(10)
+# n2 = Node(20)
+# n3 = Node(30)
+# l = LinkedList()
+# l.add(n1)
+# l.add(n2)
+# l.add(n3)
+# l
+# l.insert(n3, 100)
+# l
+# l.remove(30)

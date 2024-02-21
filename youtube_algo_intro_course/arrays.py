@@ -19,3 +19,5 @@ new_list.append(5) # this is constant time O(1) since obj is added to end of lis
 new_list.extend([10,20,30]) # O(k) where k represents number of objects being added to existing list
 new_list.remove(10) # linear runtime O(n) since needs to change other indeces
 print(new_list)
+
+list

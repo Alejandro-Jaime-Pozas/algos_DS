@@ -1,4 +1,41 @@
+def topKFrequent(nums, k):
+    # Big O n log n
+    # need to compare items in array with one another
+    # could create dict/hash where item is key, value counts number of that key
+    # in the end, have dict with different values, would need to sort or somehow get the key of the highest k values...
+    # sorting should work, will be process independent of getting the counts of each list item, good for time complexity
+    if not nums: return [0]
 
+    counts = {}
+    for num in nums:
+        counts[num] = counts.get(num, 0) + 1
+
+    counts = [item for item in counts.items()]
+    counts.sort(key=lambda tup: tup[1], reverse=True)
+
+    # return type(counts)
+    return [tup[0] for tup in counts][:k]
+    
+
+print(topKFrequent([1,1,1,1,2,3,2,2,3,3,3,4], 2))
+
+
+# from collections import defaultdict
+
+# def groupAnagrams(strs):
+#     res = defaultdict(list) # mapping charCount to list of Anagrams
+#     # defaultdict() takes in a fn like list, int, str, where the default value of the dict would be [], 0, "", accordingly
+
+#     for s in strs:
+#         count = [0] * 26 # a ... z
+#         for c in s:
+#             count[ord(c) - ord("a")] += 1
+
+#         res[tuple(count)].append(s) # tuple bc lists cannot be keys: keys must be immutable objects types
+#     print(res)
+#     return res.values()
+
+# print(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
 
 
 # # 128. Longest Consecutive Sequence - O(n)
@@ -207,7 +244,8 @@
 #             count[ord(c) - ord("a")] += 1
 
 #         res[tuple(count)].append(s) # tuple bc lists cannot be keys: keys must be immutable objects types
-#     return res.values()
+        
+#     return res.values() 
 
 # print(groupAnagrams(["eat","tea","tan","ate","nat","bat"]))
 

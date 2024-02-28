@@ -13,9 +13,10 @@ class Node:
 
     def __init__(self, data):
         self.data = data 
+        # if node is attached to linked list, could save time complexity for size() function maybe by auto-adding the count of list elements + 1 if there's a new node attached to link list, and also add when removing node or inserting node
 
     def __repr__(self):
-        return f"<Node| data: {self.data}"
+        return f"<Node| data: {self.data}>"
     
 
 class LinkedList:
@@ -24,6 +25,7 @@ class LinkedList:
     '''
 
     def __init__(self):
+        # better naming convention would be self.head_node, since it's a node or None if last node
         self.head = None 
 
     def is_empty(self):
@@ -35,7 +37,7 @@ class LinkedList:
         works as long as nodes are linked, ie nodes have a next_node property until this finds the last tail node with no next_node
         O(n) time
         '''
-        current = self.head 
+        current = self.head # this to not modify the current list's actual self.head
         count = 0
         while current:
             count += 1
@@ -48,6 +50,7 @@ class LinkedList:
         O(1) time
         '''
         new_node = Node(data)
+        # first need to set current self.head old node to new node's next node, so there will be 2 self.heads, and then update the current self.head to point to the new node
         new_node.next_node = self.head 
         self.head = new_node
 
@@ -77,16 +80,20 @@ class LinkedList:
         if index == 0:
             self.add(data)
 
+        # if index is positive
         if index > 0:
             new = Node(data)
 
+            # store index and self.head to not modify their original values
             position = index 
             current = self.head 
 
+            # while index > 1, move along the nodes in linked list until 1 is reached, which means that's the index to insert new node into
             while position > 1:
                 current = current.next_node
                 position -= 1
 
+            # set the traversed list's current node's next node to the new node, and the new node's next node to current's next node to sever the ties between current node's original next node
             current.next_node = new
             new.next_node = current.next_node 
 
@@ -101,17 +108,19 @@ class LinkedList:
         found = False 
 
         while current and not found:
+            # if node is also the list's head, set list's head node to current's next node
             if current.data == key and current is self.head:
                 found = True 
                 self.head = current.next_node 
             elif current.data == key:
                 found = True 
+                # sever the tie between the current node and next node by linking the prev node to current's next node
                 previous.next_node = current.next_node
             else:
-                # set current node to previous, and next node to current for next iteration
+                # set current node to previous, and next node to current for next iteration in while loop
                 previous = current 
                 current = current.next_node
-        return current 
+        return current # return the removed node
 
     def node_at_index(self, index):
         if index == 0:
@@ -120,6 +129,7 @@ class LinkedList:
             current = self.head 
             position = 0
 
+            # traverse the list until position is no longer less than index (which means its equal to index)
             while position < index:
                 current = current.next_node
                 position += 1
@@ -127,20 +137,21 @@ class LinkedList:
             return current
 
     def __repr__(self):
+        # need to traverse list and somehow make it visually understandable
         nodes = []
         current = self.head 
 
         while current:
             if current is self.head: # if this node is the first/newest node
-                nodes.append(f"[Head: {current.data}]")
+                nodes.append(f"[Head: {current}]")
             elif current.next_node is None: # if this node is the last/oldest node
-                nodes.append(f"[Tail: {current.data}]")
+                nodes.append(f"[Tail: {current}]")
             else:
-                nodes.append(f"[{current.data}]")
+                nodes.append(f"[{current}]")
 
             current = current.next_node
         return ' -> '.join(nodes)
-    
+
 
 # n1 = Node(10)
 # n2 = Node(20)

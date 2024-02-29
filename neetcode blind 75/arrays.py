@@ -1,23 +1,59 @@
-def topKFrequent(nums, k):
-    # Big O n log n
-    # need to compare items in array with one another
-    # could create dict/hash where item is key, value counts number of that key
-    # in the end, have dict with different values, would need to sort or somehow get the key of the highest k values...
-    # sorting should work, will be process independent of getting the counts of each list item, good for time complexity
-    if not nums: return [0]
+# def productExceptSelf(nums):
+#     # O(n) time must and no division permitted
+#     # somehow grab all nums except for current i num and just multiply them
+#     # i'm thinking, if i get all nums that are not i
+#     # could be that if there's more than 2 zeroes, return only zeroes, if 1 zero, return 0 for every num except for index 0 return product of rest of nums, else return product of rest of nums
+#     prefix = 1
+#     postfix = 1
+#     pre = []
+#     post = []
+#     for i in range(len(nums)-1):
+#         prefix *= nums[i] 
+#         pre.append(prefix)
+#     for i in range(len(nums)-1, 0, -1):
+#         postfix *= nums[i]
+#         post.append(postfix)
+#     return pre, post 
 
-    counts = {}
-    for num in nums:
-        counts[num] = counts.get(num, 0) + 1
+# print(productExceptSelf([-1,1,0,-3,3]))
 
-    counts = [item for item in counts.items()]
-    counts.sort(key=lambda tup: tup[1], reverse=True)
 
-    # return type(counts)
-    return [tup[0] for tup in counts][:k]
+# # this solution O(n). nested for loop in essence is linear, since both the outer and inner for loops in this case are just running through the same quantity of nums created in freq, so no n^2 time.
+# def topKFrequent(nums, k):
+#     count = {}
+#     freq = [[] for i in range(len(nums)+1)]
+#     for n in nums: 
+#         count[n] = count.get(n, 0) + 1
+#     for n, c in count.items():
+#         freq[c].append(n)
+
+#     res = []
+#     for i in range(len(freq)-1, 0, -1): # taking the reverse freq list start at end and end at start
+#         for n in freq[i]:
+#             res.append(n)
+#             if len(res) == k:
+#                 return res
+
+# My solution:
+#     # Big O n log n
+#     # need to compare items in array with one another
+#     # could create dict/hash where item is key, value counts number of that key
+#     # in the end, have dict with different values, would need to sort or somehow get the key of the highest k values...
+#     # sorting should work, will be process independent of getting the counts of each list item, good for time complexity
+#     if not nums: return [0]
+
+#     counts = {}
+#     for num in nums:
+#         counts[num] = counts.get(num, 0) + 1
+
+#     counts = [item for item in counts.items()]
+#     counts.sort(key=lambda tup: tup[1], reverse=True)
+
+#     # return type(counts)
+#     return [tup[0] for tup in counts][:k]
     
 
-print(topKFrequent([1,1,1,1,2,3,2,2,3,3,3,4], 2))
+# print(topKFrequent([1,1,1,1,2,3,2,2,3,3,3,4], 2))
 
 
 # from collections import defaultdict

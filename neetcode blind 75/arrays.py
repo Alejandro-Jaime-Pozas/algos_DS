@@ -1,3 +1,27 @@
+
+
+
+# def longestConsecutive(nums):
+#     # O(n) time must
+#     # cannot sort the numbers since that would be n log n time
+#     # could convert to set, then checking set is O(1) time
+#     # could check each num in list, then check for consec nums if in list and store a count of highest consec to return that
+#     # need to go through all elements to check consecutive
+#     # need to somehow store the seen values to use them in comparison to other values
+#     nums_set = set(nums)
+#     highest = 0
+#     for num in nums:
+#         if num-1 not in nums_set:
+#             # this is a start sequence, so count all consecutives
+#             current = 1
+#             while (num + current) in nums_set:
+#                 current += 1
+#             highest = max(highest, current)
+#     return highest 
+
+# print(longestConsecutive([100,4,200,1,3,2]))
+
+
 # def productExceptSelf(nums):
 #     # O(n) time must and no division permitted
 #     # somehow grab all nums except for current i num and just multiply them

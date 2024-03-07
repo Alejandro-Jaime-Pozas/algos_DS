@@ -1,58 +1,33 @@
-def maxProfit(prices):
-    # O(n)
-    l,r = 0,1
-    maxP = 0
-    while r < len(prices):
-        if prices[l] < prices[r]:
-            profit = prices[r] - prices[l]
-            maxP = max(profit, maxP)
+# CONTAINER WITH MOST WATER
+def maxArea(height):
+    # PROPER SOLUTION O(n)
+    final = 0
+    l, r = 0, len(height)-1
+    while l < r:
+        water = (r-l) * min(height[l], height[r])
+        final = max(final, water)
+        if height[l] < height[r]:
+            l += 1
         else:
-            l = r 
-        r += 1
+            r -= 1
+    return final 
 
-    return maxP 
+    # BRUTE FORCE MY SOLUTION
+    # think i could loop through list, take that number and get very possible outcome, and just have a variable max set, and update if there is a greater value, then do the same for next iterations...
+    # this would be n^2, is there way to do n log n? or more efficient version like k * n
+    final = 0
+    for i,n in enumerate(height):
+        for j in range(i+1, len(height)):
+            # check n vs n2, final should update if the product of (j-i) * min(n, n2) is > final...
+            water = (j-i) * min(n, height[j])
+            print(i, ',', j, '=', water)
+            if water > final:
+                final = water
+            # could be way to check the distance and nums when final updates, so as to stop the code if max limit has been achieved
+    return final 
 
-    # if no profit can be achieved return 0. 
-    # given a list of prices of one stock, return the max profit achievable, buy price being always before the sell price. 
-    # can do the 2 pointers solution, will always be future - present
-    buy = min(prices)
-    for i,n in enumerate(prices):
-        if n == buy:
-            return max(prices[i:]) - buy
-    # smaller number on the left should go with max on the right
-
-print(maxProfit([7,2,5,1,3]))
-
-# # CONTAINER WITH MOST WATER
-# def maxArea(height):
-#     # PROPER SOLUTION O(n)
-#     final = 0
-#     l, r = 0, len(height)-1
-#     while l < r:
-#         water = (r-l) * min(height[l], height[r])
-#         final = max(final, water)
-#         if height[l] < height[r]:
-#             l += 1
-#         else:
-#             r -= 1
-#     return final 
-
-#     # BRUTE FORCE MY SOLUTION
-#     # think i could loop through list, take that number and get very possible outcome, and just have a variable max set, and update if there is a greater value, then do the same for next iterations...
-#     # this would be n^2, is there way to do n log n? or more efficient version like k * n
-#     final = 0
-#     for i,n in enumerate(height):
-#         for j in range(i+1, len(height)):
-#             # check n vs n2, final should update if the product of (j-i) * min(n, n2) is > final...
-#             water = (j-i) * min(n, height[j])
-#             print(i, ',', j, '=', water)
-#             if water > final:
-#                 final = water
-#             # could be way to check the distance and nums when final updates, so as to stop the code if max limit has been achieved
-#     return final 
-
-# # print(maxArea([1,1]))
-# print(maxArea([1,8,7,1,1,1,1,6]))
+# print(maxArea([1,1]))
+print(maxArea([1,8,7,1,1,1,1,6]))
 
 # def threeSum(nums):
 #     res = []

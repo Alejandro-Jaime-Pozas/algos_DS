@@ -1,49 +1,83 @@
+
+
+
 # def minWindow(s, t):
-    
-#     return
+#     if t == '': return ''
+
+#     countT, window = {}, {}
+
+#     for c in t:
+#         countT[c] = 1 + countT.get(c, 0)
+
+#     have, need = 0, len(countT)
+#     res, res_len = [-1, -1], float("infinity")
+#     l = 0
+#     for r in range(len(s)):
+#         c = s[r]
+#         window[c] = 1 + window.get(c, 0)
+
+#         if c in countT and window[c] == countT[c]:
+#             have += 1
+
+#         while have == need:
+#             # update our result in final string
+#             if (r - l + 1) < res_len:
+#                 res = [l, r]
+#                 res_len = (r - l + 1)
+#             # pop from the left of window
+#             window[s[l]] -= 1
+#             if s[l] in countT and window[s[l]] < countT[s[l]]:
+#                 have -= 1
+#             l += 1
+
+#     l, r = res
+#     return s[l:r+1] if res_len != float("infinity") else ""
 
 # print(minWindow("abacab", "bac"))
 
 
-def minWindow(s, t):
-    # am missing a way to update t_values correctly...
-    t_values = {}
-    for c in t:
-        t_values[c] = t_values.get(c, 0) + 1
+# def minWindow(s, t):
+#     # am missing a way to update t_values correctly...
+#     t_values = {}
+#     for c in t:
+#         t_values[c] = t_values.get(c, 0) + 1
 
-    min_string = ""
-    t_index_in_s = []
-    counter = 0
-    l = 0
-    # for every letter in 's'
-    for r in range(len(s)):
-        # if letter in 's' matches a letter in 't'
-        if s[r] in t:
-            # add letter to t index in s list to track relevant index positions to move left index to later
-            t_index_in_s.append(r)
-            # then add letter to some dict to keep track of which 't' letters have been found IF THE LETTER IS NOT ALREADY IN SEEN AND MAX OF THAT LETTER HAS BEEN REACHED
-            # if t_values[s[r]] > 0:
-            t_values[s[r]] = t_values.get(s[r],0) - 1
-        # else dont do anything
-        # if all letters from 't' have been found in 's'
-        if max(t_values.values()) <= 0:
-            # then add that substring to min_string if substring is none OR if length of this substring is <= previous
-            if not min_string or (r - l + 1) <= len(min_string):
-                min_string = s[l:r+1] # r inclusive
-            # add 1 to the letter in t_values at s[l]
-            t_values[s[r]] = t_values.get(s[r],0) + 1
-            counter += 1
-            # now adjust the left index to position of next letter in 's' that is also part of 't'
-            if len(t_index_in_s) > counter:
-                l = t_index_in_s[counter] # WHAT IF COUNTER EXCEEDS THE LENGTH OF LIST?
-            # else dont move left index
-        # if no letters from 't' have been found yet, move left to right
-        if sum(t_values.values()) == len(t):
-            l += 1
+#     min_string = ""
+#     t_index_in_s = []
+#     counter = 0
+#     l = 0
+#     # for every letter in 's'
+#     for r in range(len(s)):
+#         # if letter in 's' matches a letter in 't'
+#         if s[r] in t:
+#             # add letter to t index in s list to track relevant index positions to move left index to later
+#             t_index_in_s.append(r)
+#             # then add letter to some dict to keep track of which 't' letters have been found IF THE LETTER IS NOT ALREADY IN SEEN AND MAX OF THAT LETTER HAS BEEN REACHED
+#             # if t_values[s[r]] > 0:
+#             t_values[s[r]] = t_values.get(s[r],0) - 1
+#         # else dont do anything
+#         # if all letters from 't' have been found in 's'
+#         if max(t_values.values()) <= 0:
+#             # if all letters have been found
+#                 # if there's extra letters such that value of letter in t_values < 0
+#                     # then while s[l] < 0, add t_values[s[l]] + 1
+#             # then add that substring to min_string if substring is none OR if length of this substring is <= previous
+#             if not min_string or (r - l + 1) <= len(min_string):
+#                 min_string = s[l:r+1] # r inclusive
+#             # add 1 to the letter in t_values at s[l]
+#             t_values[s[r]] = t_values.get(s[r],0) + 1
+#             counter += 1
+#             # now adjust the left index to position of next letter in 's' that is also part of 't'
+#             if len(t_index_in_s) > counter:
+#                 l = t_index_in_s[counter] # WHAT IF COUNTER EXCEEDS THE LENGTH OF LIST?
+#             # else dont move left index
+#         # if no letters from 't' have been found yet, move left to right
+#         if sum(t_values.values()) == len(t):
+#             l += 1
             
-    return min_string
+#     return min_string
 
-print(minWindow("acbbaca", "aba"))
+# print(minWindow("acbbaca", "aba"))
 
 
 # def characterReplacement(s, k):

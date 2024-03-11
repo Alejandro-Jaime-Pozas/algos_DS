@@ -15,7 +15,7 @@ def isValid(s):
             stack.append(c)
     return True if not stack else False  
 
-    print(isValid('{}[]'))
+print(isValid('{}[]'))
 
     # # order does matter
     # # somehow need to track which brackets are opening/closing and in which order to determine if valid

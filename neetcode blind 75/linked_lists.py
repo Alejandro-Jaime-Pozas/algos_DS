@@ -1,45 +1,99 @@
-# Reorder list
+# Remove the nth node from end of list
 # Definition for singly-linked list.
 class ListNode:
     def __init__(self, val=0, next=None):
         self.val = val
         self.next = next
 class Solution:
-    def reorderList(self, head):
-        """
-        Do not return anything, modify head in-place instead.
-        """
-        # find middle node by traversing list twice,
-        slow, fast = head, head.next
-        while fast and fast.next:
-            slow = slow.next
-            fast = fast.next.next
+    def removeNthFromEnd(self, head, n: int):
+        # so i think need to traverse the list obviously to get to desired node
+        # nth from end is same as length of list...
+        # options: reverse the list first, then remove link for nth node (but would then need to reset list to original)
+            # traverse list once and get the nth node, then cut link for that node, but since singly linked list, would need to traverse second time knowing that len(list) - nth node + 1 is the node to remove
+        length = 0
+        traverse = head
+        while traverse:
+            length += 1
+            traverse = traverse.next
 
-        # reverse second half
-        second = slow.next
-        prev = slow.next = None
-        while second:
-            tmp = second.next
-            second.next = prev
-            prev = second
-            second = tmp
+        node_to_remove_prev = length - n
+        trav_remove = ListNode()
+        trav_remove.next = head
+        position = 0
+        while trav_remove:
+            # check if ntrp == this iter, means this node.next needs to be removed
+            if node_to_remove_prev == position:
+                if trav_remove.next.next:
+                    if trav_remove.next == head:
+                        head = trav_remove.next.next
+                    trav_remove.next = trav_remove.next.next
+                else:
+                    if trav_remove.next == head:
+                        head = None
+                    else:
+                        trav_remove.next = None
+            trav_remove = trav_remove.next
+            position += 1
+        return head
+        # final = []
+        # trav = head
+        # while trav:
+        #     final.append(trav.val)
+            # trav = trav.next
 
-        # merge two halfs
-        first, second = head, prev
-        while second:
-            tmp1, tmp2 = first.next, second.next
-            first.next = second
-            second.next = tmp1
-            first, second = tmp1, tmp2
+
+# n6 = ListNode(6)
+# n5 = ListNode(5, n6)
+# n4 = ListNode(4, n5)
+# n3 = ListNode(3, n4)
+# n2 = ListNode(2, n3)
+# n1 = ListNode(1, n2)
+n1 = ListNode(1)
+sol = Solution().removeNthFromEnd(n1, 1)
+print(sol)
+
+# # Reorder list
+# # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# class Solution:
+#     def reorderList(self, head):
+#         """
+#         Do not return anything, modify head in-place instead.
+#         """
+#         # find middle node by traversing list with 2 pointers
+#         slow, fast = head, head.next
+#         while fast and fast.next:
+#             slow = slow.next
+#             fast = fast.next.next
+
+#         # reverse second half
+#         second = slow.next
+#         prev = slow.next = None
+#         while second:
+#             tmp = second.next
+#             second.next = prev
+#             prev = second
+#             second = tmp
+
+#         # merge two halfs
+#         first, second = head, prev
+#         while second:
+#             tmp1, tmp2 = first.next, second.next
+#             first.next = second
+#             second.next = tmp1
+#             first, second = tmp1, tmp2
 
 
-n1 = ListNode(6)
-n2 = ListNode(5, n1)
-n3 = ListNode(4, n2)
-n4 = ListNode(3, n3)
-n5 = ListNode(2, n4)
-n6 = ListNode(1, n5)
-sol = Solution().reorderList(n6)
+# n1 = ListNode(6)
+# n2 = ListNode(5, n1)
+# n3 = ListNode(4, n2)
+# n4 = ListNode(3, n3)
+# n5 = ListNode(2, n4)
+# n6 = ListNode(1, n5)
+# sol = Solution().reorderList(n6)
 
 
 

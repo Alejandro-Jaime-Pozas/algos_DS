@@ -1,56 +1,90 @@
-# Remove the nth node from end of list
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
-        self.val = val
-        self.next = next
-class Solution:
-    def removeNthFromEnd(self, head, n: int):
-        # so i think need to traverse the list obviously to get to desired node
-        # nth from end is same as length of list...
-        # options: reverse the list first, then remove link for nth node (but would then need to reset list to original)
-            # traverse list once and get the nth node, then cut link for that node, but since singly linked list, would need to traverse second time knowing that len(list) - nth node + 1 is the node to remove
-        length = 0
-        traverse = head
-        while traverse:
-            length += 1
-            traverse = traverse.next
-
-        node_to_remove_prev = length - n
-        trav_remove = ListNode()
-        trav_remove.next = head
-        position = 0
-        while trav_remove:
-            # check if ntrp == this iter, means this node.next needs to be removed
-            if node_to_remove_prev == position:
-                if trav_remove.next.next:
-                    if trav_remove.next == head:
-                        head = trav_remove.next.next
-                    trav_remove.next = trav_remove.next.next
-                else:
-                    if trav_remove.next == head:
-                        head = None
-                    else:
-                        trav_remove.next = None
-            trav_remove = trav_remove.next
-            position += 1
-        return head
-        # final = []
-        # trav = head
-        # while trav:
-        #     final.append(trav.val)
-            # trav = trav.next
 
 
-# n6 = ListNode(6)
-# n5 = ListNode(5, n6)
-# n4 = ListNode(4, n5)
-# n3 = ListNode(3, n4)
-# n2 = ListNode(2, n3)
-# n1 = ListNode(1, n2)
-n1 = ListNode(1)
-sol = Solution().removeNthFromEnd(n1, 1)
-print(sol)
+
+# # Linked list cycle
+# # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
+# class Solution:
+#     def hasCycle(self, head) -> bool:
+#         # have a hidden variable in test called pos
+#         # pos is the index of the node
+#         # so, if a node's next node (tail) is less than original node's index, return True, else False
+#         # thinking maybe shortcut knowing the pos..but still need to traverse list anyway
+#         # seen = set()
+#         # curr = head
+#         # while curr:
+#         #     if curr in seen:
+#         #         return True
+#         #     else:
+#         #         seen.add(curr)
+#         #         curr = curr.next
+#         # return False
+#         slow, fast = head, head
+#         while fast and fast.next:
+#             slow = slow.next
+#             fast = fast.next.next
+#             if slow == fast:
+#                 return True
+#         False
+
+
+# # Remove the nth node from end of list
+# # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# class Solution:
+#     def removeNthFromEnd(self, head, n: int):
+#         # so i think need to traverse the list obviously to get to desired node
+#         # nth from end is same as length of list...
+#         # options: reverse the list first, then remove link for nth node (but would then need to reset list to original)
+#             # traverse list once and get the nth node, then cut link for that node, but since singly linked list, would need to traverse second time knowing that len(list) - nth node + 1 is the node to remove
+#         length = 0
+#         traverse = head
+#         while traverse:
+#             length += 1
+#             traverse = traverse.next
+
+#         node_to_remove_prev = length - n
+#         trav_remove = ListNode()
+#         trav_remove.next = head
+#         position = 0
+#         while trav_remove:
+#             # check if ntrp == this iter, means this node.next needs to be removed
+#             if node_to_remove_prev == position:
+#                 if trav_remove.next.next:
+#                     if trav_remove.next == head:
+#                         head = trav_remove.next.next
+#                     trav_remove.next = trav_remove.next.next
+#                 else:
+#                     if trav_remove.next == head:
+#                         head = None
+#                     else:
+#                         trav_remove.next = None
+#             trav_remove = trav_remove.next
+#             position += 1
+#         return head
+#         # final = []
+#         # trav = head
+#         # while trav:
+#         #     final.append(trav.val)
+#             # trav = trav.next
+
+
+# # n6 = ListNode(6)
+# # n5 = ListNode(5, n6)
+# # n4 = ListNode(4, n5)
+# # n3 = ListNode(3, n4)
+# # n2 = ListNode(2, n3)
+# # n1 = ListNode(1, n2)
+# n1 = ListNode(1)
+# sol = Solution().removeNthFromEnd(n1, 1)
+# print(sol)
 
 # # Reorder list
 # # Definition for singly-linked list.

@@ -1,47 +1,113 @@
-# merge k sorted lists
-# Definition for singly-linked list.
-class ListNode:
-    def __init__(self, val=0, next=None):
+# Maximum depth of binary tree
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
         self.val = val
-        self.next = next
+        self.left = left
+        self.right = right
 class Solution:
-    def mergeKLists(self, lists):
-        # lists are already sorted in asc order
-        # each item in lists is a ListNode obj startin with the head
-        if not lists or len(lists) == 0:
-            return None
+    def maxDepth(self, root) -> int:
+        from collections import deque
+        # # recursive solution
+        # if not root:
+        #     return 0
+        # # traverse root's left and right nodes but add + 1 to a variable and in end return it
+        # return 1 + max(self.maxDepth(root.left), self.maxDepth(root.right))
 
-        while len(lists) > 1:  # keep reducing while there's more than 1 list
-            merged_lists = []
+        # Breadth first solution
+        if not root:
+            return 0
+        level = 0
+        q = deque([root])
+        while q:
+            for i in range(len(q)):
+                node = q.popleft()
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            level += 1
+        return level
 
-            for i in range(0, len(lists), 2):  # increments of 2 to grab 2 lists each round so i and i+1
-                l1 = lists[i]
-                l2 = lists[i+1] if i + 1 < len(lists) else None
-                merged_lists.append(self.mergeList(l1, l2))
-            lists = merged_lists
-        return lists[0]
-
-
-    def mergeList(self, l1, l2):
-        dummy = ListNode()
-        tail = dummy
-
-        while l1 and l2:
-            if l1.val < l2.val:
-                tail.next = l1
-                l1 = l1.next
-            else:
-                tail.next = l2
-                l2 = l2.next
-            tail = tail.next
-        if l1:
-            tail.next = l1
-        if l2:
-            tail.next = l2
-        return dummy.next
+n5 = TreeNode(15)
+n4 = TreeNode(7)
+n3 = TreeNode(20, n5, n4)
+n2 = TreeNode(9)
+n1 = TreeNode(3, n2, n3)
+Solution.maxDepth(n1)
 
 
-print(Solution.mergeKLists('sme', ['123', '345', None, None]))
+# # Invert binary tree
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def invertTree(self, root):
+#         # need to somehow switch all nodes with a parent from parent's left to right and vice versa
+#         # while there is a node at parent's left or right
+#         # this is a recursive fn.
+#         # if there is no root node in this iteration, return None
+#         if not root:
+#             return None
+
+#         # if root, switch its left and right children
+#         tmp = root.left
+#         root.left = root.right
+#         root.right = tmp
+
+#         self.invertTree(root.left)  # this is the new root in next iter
+#         self.invertTree(root.right)  # this is the new root in next iter
+#         return root
+
+#     # in the base case you want to return None, since what you're doing is just switching values for left and right of node
+
+
+# # merge k sorted lists
+# # Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, val=0, next=None):
+#         self.val = val
+#         self.next = next
+# class Solution:
+#     def mergeKLists(self, lists):
+#         # lists are already sorted in asc order
+#         # each item in lists is a ListNode obj startin with the head
+#         if not lists or len(lists) == 0:
+#             return None
+
+#         while len(lists) > 1:  # keep reducing while there's more than 1 list
+#             merged_lists = []
+
+#             for i in range(0, len(lists), 2):  # increments of 2 to grab 2 lists each round so i and i+1
+#                 l1 = lists[i]
+#                 l2 = lists[i+1] if i + 1 < len(lists) else None
+#                 merged_lists.append(self.mergeList(l1, l2))
+#             lists = merged_lists
+#         return lists[0]
+
+
+#     def mergeList(self, l1, l2):
+#         dummy = ListNode()
+#         tail = dummy
+
+#         while l1 and l2:
+#             if l1.val < l2.val:
+#                 tail.next = l1
+#                 l1 = l1.next
+#             else:
+#                 tail.next = l2
+#                 l2 = l2.next
+#             tail = tail.next
+#         if l1:
+#             tail.next = l1
+#         if l2:
+#             tail.next = l2
+#         return dummy.next
+
+
+# print(Solution.mergeKLists('sme', ['123', '345', None, None]))
 
 
 # # Linked list cycle

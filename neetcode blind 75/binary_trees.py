@@ -7,32 +7,44 @@ class TreeNode:
         self.right = right
 class Solution:
     def isSubtree(self, root, subroot) -> bool:
-        # same as same tree, but in this case check starts when subroot initial val is found in root
-        # will need to traverse w/recursion or BFS
-        # for every value in root that equals top subroot value, will need to check
-        # will need a general iteration through entire root (until match found), then inner for loop iteration when the top value in subroot matches current root iteration
-
-        # GLOBAL ROOT SCOPE
-
-        # Base case
-        if (not root and subroot) or (root and not subroot):
-            # at tree leaf, return root. doesn't matter what you return, just to end execution
-            return False
-        elif not root and not subroot:
+        # if there is a root but no subroot, then any children in root have null value equal to subroot, return True
+        if not subroot:
             return True
-        # if root = subroot then traverse both and return true if true
-        elif root.val == subroot.val:
-            left = self.isSubtree(root.left, subroot.left)
-            right = self.isSubtree(root.right, subroot.right)
-        # if subroot value is not = root value, then keep traversing root until end
-        while root.val != subroot.val:
+        # if there is no root but is a subroot, that's false since subroot should be in root
+        elif not root:
+            return False
+        # other two cases are covered in sameTree, so run through fn
+        elif self.sameTree(root, subroot):
+            return True
+        else:
+            # keep iterating through left and right of root
+            left = self.isSubtree(root.left, subroot)
+            right = self.isSubtree(root.right, subroot)
+            # what if same tree is false for all subtrees? return False
+            return left == True or right == True
 
+    def sameTree(self, root, subroot):
+        """Check root and subroot's values and all their children's values. If same, return True else False."""
+        # if both are None then return True bc they're the same (top-most base case)
+        if not root and not subroot:
+            return True
+        # else if root and subroot exist and have same value
+        elif root and subroot and root.val == subroot.val:
+            left = self.sameTree(root.left, subroot.left)
+            right = self.sameTree(root.right, subroot.right)
+            return left == right == True
+        # missing if root and not subroot, if not subroot and root; means they're not equal at comparison level, since we're checking for identical trees here in sameTree fn unlike isSubtree fn (where you can have root and no subroot)
+        return False
 
-        # traverse the curr root's left and right nodes. input subroot to check if equal in each
-
-
-
-
+n3 = TreeNode(2)
+n2 = TreeNode(1)
+n1 = TreeNode(4, n2, n3)
+n30 = TreeNode(5)
+n20 = TreeNode(4)
+n10 = TreeNode(3, n20, n30)
+n20.left, n20.right = TreeNode(1), TreeNode(2)
+Solution().isSubtree(n1, n10)
+# print(Solution().isSubtree(n10, n1))
 
 
 # # Same tree

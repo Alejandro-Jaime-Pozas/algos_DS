@@ -1,50 +1,85 @@
-# Subtree of another tree
+# Lowest common ancestor
 # Definition for a binary tree node.
 class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
+    def __init__(self, x):
+        self.val = x
+        self.left = None
+        self.right = None
+
 class Solution:
-    def isSubtree(self, root, subroot) -> bool:
-        # if there is a root but no subroot, then any children in root have null value equal to subroot, return True
-        if not subroot:
-            return True
-        # if there is no root but is a subroot, that's false since subroot should be in root
-        elif not root:
-            return False
-        # other two cases are covered in sameTree, so run through fn
-        elif self.sameTree(root, subroot):
-            return True
-        else:
-            # keep iterating through left and right of root
-            left = self.isSubtree(root.left, subroot)
-            right = self.isSubtree(root.right, subroot)
-            # what if same tree is false for all subtrees? return False
-            return left == True or right == True
+    def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
+        # need to find the lowest ancestor of both p and q. could be a different node, or p could be ancestor of q or vice versa. there will always be a common ancestor.
+        # essentially need to traverse the tree, check for p and q. as soon as reaching p and q, go back up the tree to search for the common ancestor...
+        # could maybe store the values of nodes already seen but how to recursively include those values?
+        curr = root
+        while curr:
+            if p.val > curr.val and q.val > curr.val:
+                curr = curr.right
+            elif p.val < curr.val and q.val < curr.val:
+                curr = curr.left
+            else:
+                return curr
 
-    def sameTree(self, root, subroot):
-        """Check root and subroot's values and all their children's values. If same, return True else False."""
-        # if both are None then return True bc they're the same (top-most base case)
-        if not root and not subroot:
-            return True
-        # else if root and subroot exist and have same value
-        elif root and subroot and root.val == subroot.val:
-            left = self.sameTree(root.left, subroot.left)
-            right = self.sameTree(root.right, subroot.right)
-            return left == right == True
-        # missing if root and not subroot, if not subroot and root; means they're not equal at comparison level, since we're checking for identical trees here in sameTree fn unlike isSubtree fn (where you can have root and no subroot)
-        return False
 
-n3 = TreeNode(2)
-n2 = TreeNode(1)
-n1 = TreeNode(4, n2, n3)
-n30 = TreeNode(5)
-n20 = TreeNode(4)
-n10 = TreeNode(3, n20, n30)
-n20.left, n20.right = TreeNode(1), TreeNode(2)
-Solution().isSubtree(n1, n10)
-# print(Solution().isSubtree(n10, n1))
+n3 = TreeNode(9)
+n2 = TreeNode(3)
+n1 = TreeNode(4)
+n1.left, n1.right = n2, n3
+# n30 = TreeNode(5)
+# n20 = TreeNode(4)
+# n10 = TreeNode(3, n20, n30)
+# n20.left, n20.right = TreeNode(1), TreeNode(2)
+# Solution().lowestCommonAncestor(n1, n2, n3)  # 4
+print(Solution().lowestCommonAncestor(n1, n2, n3).val)
+
+
+# # Subtree of another tree
+# # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def isSubtree(self, root, subroot) -> bool:
+#         # if there is a root but no subroot, then any children in root have null value equal to subroot, return True
+#         if not subroot:
+#             return True
+#         # if there is no root but is a subroot, that's false since subroot should be in root
+#         elif not root:
+#             return False
+#         # other two cases are covered in sameTree, so run through fn
+#         elif self.sameTree(root, subroot):
+#             return True
+#         else:
+#             # keep iterating through left and right of root
+#             left = self.isSubtree(root.left, subroot)
+#             right = self.isSubtree(root.right, subroot)
+#             # what if same tree is false for all subtrees? return False
+#             return left == True or right == True
+
+#     def sameTree(self, root, subroot):
+#         """Check root and subroot's values and all their children's values. If same, return True else False."""
+#         # if both are None then return True bc they're the same (top-most base case)
+#         if not root and not subroot:
+#             return True
+#         # else if root and subroot exist and have same value
+#         elif root and subroot and root.val == subroot.val:
+#             left = self.sameTree(root.left, subroot.left)
+#             right = self.sameTree(root.right, subroot.right)
+#             return left == right == True
+#         # missing if root and not subroot, if not subroot and root; means they're not equal at comparison level, since we're checking for identical trees here in sameTree fn unlike isSubtree fn (where you can have root and no subroot)
+#         return False
+
+# n3 = TreeNode(2)
+# n2 = TreeNode(1)
+# n1 = TreeNode(4, n2, n3)
+# n30 = TreeNode(5)
+# n20 = TreeNode(4)
+# n10 = TreeNode(3, n20, n30)
+# n20.left, n20.right = TreeNode(1), TreeNode(2)
+# Solution().isSubtree(n1, n10)
+# # print(Solution().isSubtree(n10, n1))
 
 
 # # Same tree

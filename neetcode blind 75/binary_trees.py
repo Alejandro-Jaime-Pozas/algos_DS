@@ -28,8 +28,10 @@
 #                     current_nodes.append(node.left)
 #                 if node.right:
 #                     current_nodes.append(node.right)
-#             level_order_list.append(curr_level)
+#             level_order_list.append(curr_level) if curr_level else None
 #         return level_order_list
+
+
 
 # # Example usage:
 # # Create a tree

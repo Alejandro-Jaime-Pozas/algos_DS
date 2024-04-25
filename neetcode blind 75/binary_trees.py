@@ -1,6 +1,51 @@
 
 
 
+# # # Binary tree level order traversal
+# # # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def levelOrder(self, root):
+#         # need to use a deque or queue to pop items from start
+#         # while root, add root to level_order_list
+#         # then get root.left and root.right and if not None add them
+#         # i could initialize the list with first root. or could have 2 lists. one with all same level nodes, other to add those same level nodes' children to the next level
+#         from collections import deque
+#         level_order_list = []
+#         current_nodes = deque([root])
+#         while current_nodes:
+#             curr_level = []
+#             level_size = len(current_nodes)
+#             for _ in range(level_size):  # this does not update its range; if added values to current_nodes within loop, doesn't acct for them
+#                 node = current_nodes.popleft()
+#                 curr_level.append(node.val)
+#                 # now go on to next nodes
+#                 if node.left:
+#                     current_nodes.append(node.left)
+#                 if node.right:
+#                     current_nodes.append(node.right)
+#             level_order_list.append(curr_level)
+#         return level_order_list
+
+# # Example usage:
+# # Create a tree
+# root = TreeNode(3)
+# root.left = TreeNode(9)
+# root.right = TreeNode(20)
+# root.left.left = TreeNode(16)
+# root.right.left = TreeNode(15)
+# root.right.right = TreeNode(7)
+
+# # Use Solution class to get level order traversal
+# sol = Solution()
+# print(sol.levelOrder(root))  # Output: [[3], [9, 20], [15, 7]]
+
+
+
 # # Lowest common ancestor
 # # Definition for a binary tree node.
 # class TreeNode:

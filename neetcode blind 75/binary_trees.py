@@ -1,3 +1,32 @@
+# Validate binary search tree
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def isValidBST(self, root) -> bool:
+
+        def valid(node, left, right):
+            if not node:
+                return True
+            if not (node.val < right and node.val > left):
+                return False
+
+            return valid(node.left, left, node.val) and valid(node.right, node.val, right)
+        return valid(root, float('-inf'), float('inf'))
+
+
+r = TreeNode(10)
+r.left = TreeNode(5)
+r.left.left = TreeNode(4)
+r.left.right = TreeNode(6)
+r.right = TreeNode(15)
+r.right.left = TreeNode(9)
+r.right.right = TreeNode(20)
+Solution().isValidBST(r)
+# print(Solution().isValidBST(r))
 
 
 

@@ -1,4 +1,65 @@
+# Construct binary tree from preourder and inorder traversal
+# Definition for a binary tree node.
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+class Solution:
+    def buildTree(self, preorder, inorder):
+        # preorder: top down, then left right
+        # inorder: left to right
+        # for some reason need both to construct a binary tree...
+        # all values from each list are included in the other, so same length as well
+        # what's the pattern/algo?
+        # first in preorder is always the root. second could be left/right child of root
+        # as for inorder, everything left of root is to the left, right to the right
+        if not preorder or not inorder:
+            return None
+        root = TreeNode(preorder[0])
+        mid = inorder.index(preorder[0])
+        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+        return root
 
+
+Solution().buildTree([3,9,20,15,7], [9,3,15,20,7])
+
+
+# # # Kth smallest element in a BST
+# # # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def kthSmallest(self, root, k) -> int:
+#         # bst is an index ordered BST so values are in order smallest to largest left to right
+#         # still need to traverse entire tree to find the amount of nodes to return k.
+#         # root.left < root < root.right always
+#         n = 0
+#         stack = []
+#         cur = root
+
+#         while cur or stack:
+#             while cur:
+#                 stack.append(cur)
+#                 cur = cur.left
+
+#             cur = stack.pop()
+#             n += 1
+#             if n == k:
+#                 return cur.val
+#             cur = cur.right
+
+# root = TreeNode(5)
+# root.left = TreeNode(3)
+# root.right = TreeNode(6)
+# root.left.left = TreeNode(2)
+# root.left.right = TreeNode(4)
+# Solution().kthSmallest(root, 3)
+# # print(Solution().kthSmallest(root, 3))
 
 
 # # Validate binary search tree

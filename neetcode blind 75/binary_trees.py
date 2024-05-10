@@ -1,29 +1,33 @@
-# Construct binary tree from preourder and inorder traversal
-# Definition for a binary tree node.
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-class Solution:
-    def buildTree(self, preorder, inorder):
-        # preorder: top down, then left right
-        # inorder: left to right
-        # for some reason need both to construct a binary tree...
-        # all values from each list are included in the other, so same length as well
-        # what's the pattern/algo?
-        # first in preorder is always the root. second could be left/right child of root
-        # as for inorder, everything left of root is to the left, right to the right
-        if not preorder or not inorder:
-            return None
-        root = TreeNode(preorder[0])
-        mid = inorder.index(preorder[0])
-        root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
-        root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
-        return root
+my_dict = {i: value for i, value in enumerate([5,4,3,2])}
+print(my_dict)
 
 
-Solution().buildTree([3,9,20,15,7], [9,3,15,20,7])
+# # Construct binary tree from preourder and inorder traversal
+# # Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
+# class Solution:
+#     def buildTree(self, preorder, inorder):
+#         # preorder: top down, then left right
+#         # inorder: left to right
+#         # for some reason need both to construct a binary tree...
+#         # all values from each list are included in the other, so same length as well
+#         # what's the pattern/algo?
+#         # first in preorder is always the root. second could be left/right child of root
+#         # as for inorder, everything left of root is to the left, right to the right
+#         if not preorder or not inorder:
+#             return None
+#         root = TreeNode(preorder[0])
+#         mid = inorder.index(preorder[0])
+#         root.left = self.buildTree(preorder[1:mid+1], inorder[:mid])
+#         root.right = self.buildTree(preorder[mid+1:], inorder[mid+1:])
+#         return root
+
+
+# Solution().buildTree([3,9,20,15,7], [9,3,15,20,7])
 
 
 # # # Kth smallest element in a BST

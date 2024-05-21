@@ -1,8 +1,11 @@
-my_dict = {i: value for i, value in enumerate([5,4,3,2])}
-print(my_dict)
 
 
-# # Construct binary tree from preourder and inorder traversal
+
+# my_dict = {i: value for i, value in enumerate([5,4,3,2])}
+# print(my_dict)
+
+
+# # Construct binary tree from preorder and inorder traversal
 # # Definition for a binary tree node.
 # class TreeNode:
 #     def __init__(self, val=0, left=None, right=None):
@@ -49,7 +52,7 @@ print(my_dict)
 #         while cur or stack:
 #             while cur:
 #                 stack.append(cur)
-#                 cur = cur.left
+#                 cur = cur.left  # traverse the left-most part of BST
 
 #             cur = stack.pop()
 #             n += 1
